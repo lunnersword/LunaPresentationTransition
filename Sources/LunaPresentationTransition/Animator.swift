@@ -8,7 +8,7 @@
 import UIKit
 
 class Animator: NSObject, UIViewControllerAnimatedTransitioning {
-	var animationDictionary: [String: Any]
+	var animationDictionary: [String: Any] = [:]
 	let configuration: CustomTransitionConfiguration
 	init(_ configuration: CustomTransitionConfiguration) {
 		self.configuration = configuration
@@ -18,9 +18,9 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 	}
 	
 	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-		if let  animate = configuration.animateTransition {
-			animate(self, transitionContext)
-		}
+		let  animate = configuration.animateTransition
+		animate(self, transitionContext)
+		
 	}
 	
 	

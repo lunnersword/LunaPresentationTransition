@@ -14,6 +14,10 @@ class InteractiveAnimator: UIPercentDrivenInteractiveTransition {
 		self.configuration = configuration
 	}
 	
+	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+		return configuration.duration
+	}
+	
 	override func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
 		super.startInteractiveTransition(transitionContext)
 		self.context = transitionContext
