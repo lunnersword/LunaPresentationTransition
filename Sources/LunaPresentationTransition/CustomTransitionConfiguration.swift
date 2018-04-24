@@ -6,14 +6,14 @@
 //
 import UIKit
 
-typealias AnimateTransition = (Animator, UIViewControllerContextTransitioning) -> Void
-typealias InteractiveTransitionStarter = (InteractiveAnimator, UIViewControllerContextTransitioning) -> Void
-typealias HandleUpdateClosure = (InteractiveAnimator, AnyObject) -> Void
+public typealias AnimateTransition = (Animator, UIViewControllerContextTransitioning) -> Void
+public typealias InteractiveTransitionStarter = (InteractiveAnimator, UIViewControllerContextTransitioning) -> Void
+public typealias HandleUpdateClosure = (InteractiveAnimator, AnyObject) -> Void
 
-struct CustomTransitionConfiguration {
-	let isInteractive: Bool
-	let duration: TimeInterval
-	let animateTransition: AnimateTransition
-	let interactiveTransitionStarter: InteractiveTransitionStarter?
-	let handleUpdateClosure: HandleUpdateClosure?
+public struct CustomTransitionConfiguration {
+	public var isInteractive: Bool
+	public var duration: TimeInterval
+	public var animateTransition: AnimateTransition
+	public var interactiveTransitionStarter: InteractiveTransitionStarter?
+	public var handleUpdateClosure: HandleUpdateClosure?
 }

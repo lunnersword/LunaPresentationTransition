@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-protocol TransitionAnimationHelperDelegate {
+public protocol TransitionAnimationHelperDelegate {
 	static func presentAnimator() -> AnimateTransition?
 	static func dismissAnimator() -> AnimateTransition?
 	

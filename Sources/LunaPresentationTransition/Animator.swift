@@ -7,17 +7,17 @@
 
 import UIKit
 
-class Animator: NSObject, UIViewControllerAnimatedTransitioning {
+public class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 	var animationDictionary: [String: Any] = [:]
 	let configuration: CustomTransitionConfiguration
 	init(_ configuration: CustomTransitionConfiguration) {
 		self.configuration = configuration
 	}
-	func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+	public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return configuration.duration
 	}
 	
-	func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+	public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
 		let  animate = configuration.animateTransition
 		animate(self, transitionContext)
 		

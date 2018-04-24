@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InteractiveAnimator: UIPercentDrivenInteractiveTransition {
+public class InteractiveAnimator: UIPercentDrivenInteractiveTransition {
 	var configuration: CustomTransitionConfiguration
 	var context: UIViewControllerContextTransitioning?
 	init(_ configuration: CustomTransitionConfiguration) {
@@ -18,7 +18,7 @@ class InteractiveAnimator: UIPercentDrivenInteractiveTransition {
 		return configuration.duration
 	}
 	
-	override func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
+	override public func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
 		super.startInteractiveTransition(transitionContext)
 		self.context = transitionContext
 		if let start = configuration.interactiveTransitionStarter {

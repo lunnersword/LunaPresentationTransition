@@ -8,31 +8,31 @@
 import UIKit
 
 
-typealias PresentationInitialization = (UIViewController , UIViewController?, PresentationController) -> Void
-typealias PresentationTransitionWillBeginClosure = (PresentationController) -> Void
-typealias PresentationTransitionDidEndClosure = (PresentationController, Bool) -> Void
-typealias DismissalTransitionWillBeginClosure = (PresentationController) -> Void
-typealias DismissalTransitionDidEndClosure = (PresentationController, Bool) -> Void
-typealias FrameOfPresentedViewInContainerViewClosure = (PresentationController) -> CGRect
-typealias ContainerViewWillLayoutSubviewsClosure = (PresentationController) -> Void
-typealias ContainerViewDidLayoutSubviewsClosure = (PresentationController) -> Void
-struct CustomPresentationConfiguration {
+public typealias PresentationInitialization = (UIViewController , UIViewController?, PresentationController) -> Void
+public typealias PresentationTransitionWillBeginClosure = (PresentationController) -> Void
+public typealias PresentationTransitionDidEndClosure = (PresentationController, Bool) -> Void
+public typealias DismissalTransitionWillBeginClosure = (PresentationController) -> Void
+public typealias DismissalTransitionDidEndClosure = (PresentationController, Bool) -> Void
+public typealias FrameOfPresentedViewInContainerViewClosure = (PresentationController) -> CGRect
+public typealias ContainerViewWillLayoutSubviewsClosure = (PresentationController) -> Void
+public typealias ContainerViewDidLayoutSubviewsClosure = (PresentationController) -> Void
+public struct CustomPresentationConfiguration {
 	//
 	let showPresentInFullScreen: Bool
-	let initialization: PresentationInitialization?
-	let presentationWillBegin: PresentationTransitionWillBeginClosure?
-	let presentationDidEnd: PresentationTransitionDidEndClosure?
-	let dismissalWillBegin: DismissalTransitionWillBeginClosure?
-	let dismissalDidEnd: DismissalTransitionDidEndClosure?
-	let frameOfPresentedViewInContainerView: FrameOfPresentedViewInContainerViewClosure?
-	let containerViewWillLayoutSubviews: ContainerViewWillLayoutSubviewsClosure?
-	let containerViewDidLayoutSubviews: ContainerViewDidLayoutSubviewsClosure?
+	var initialization: PresentationInitialization?
+	var presentationWillBegin: PresentationTransitionWillBeginClosure?
+	var presentationDidEnd: PresentationTransitionDidEndClosure?
+	var dismissalWillBegin: DismissalTransitionWillBeginClosure?
+	var dismissalDidEnd: DismissalTransitionDidEndClosure?
+	var frameOfPresentedViewInContainerView: FrameOfPresentedViewInContainerViewClosure?
+	var containerViewWillLayoutSubviews: ContainerViewWillLayoutSubviewsClosure?
+	var containerViewDidLayoutSubviews: ContainerViewDidLayoutSubviewsClosure?
 	
-	init(initialization: PresentationInitialization?, presentationWillBegin: PresentationTransitionWillBeginClosure?, presentationDidEnd: PresentationTransitionDidEndClosure?, dismissalWillbegin: DismissalTransitionWillBeginClosure?, dismissalDidEnd: DismissalTransitionDidEndClosure?) {
+	public init(initialization: PresentationInitialization?, presentationWillBegin: PresentationTransitionWillBeginClosure?, presentationDidEnd: PresentationTransitionDidEndClosure?, dismissalWillbegin: DismissalTransitionWillBeginClosure?, dismissalDidEnd: DismissalTransitionDidEndClosure?) {
 		self.init(initialization: initialization, presentationWillBegin: presentationWillBegin, presentationDidEnd: presentationDidEnd, dismissalWillbegin: dismissalWillbegin, dismissalDidEnd: dismissalDidEnd, frameOfPresentedViewInContainerView: nil, containerViewWillLayoutSubviews: nil, containerViewDidLayoutSubviews: nil, inFullScreen: true)
 	}
 	
-	init(initialization: PresentationInitialization?, presentationWillBegin: PresentationTransitionWillBeginClosure?, presentationDidEnd: PresentationTransitionDidEndClosure?, dismissalWillbegin: DismissalTransitionWillBeginClosure?, dismissalDidEnd: DismissalTransitionDidEndClosure?, frameOfPresentedViewInContainerView: FrameOfPresentedViewInContainerViewClosure?, containerViewWillLayoutSubviews: ContainerViewWillLayoutSubviewsClosure?, containerViewDidLayoutSubviews: ContainerViewDidLayoutSubviewsClosure?, inFullScreen: Bool) {
+	public init(initialization: PresentationInitialization?, presentationWillBegin: PresentationTransitionWillBeginClosure?, presentationDidEnd: PresentationTransitionDidEndClosure?, dismissalWillbegin: DismissalTransitionWillBeginClosure?, dismissalDidEnd: DismissalTransitionDidEndClosure?, frameOfPresentedViewInContainerView: FrameOfPresentedViewInContainerViewClosure?, containerViewWillLayoutSubviews: ContainerViewWillLayoutSubviewsClosure?, containerViewDidLayoutSubviews: ContainerViewDidLayoutSubviewsClosure?, inFullScreen: Bool) {
 		self.initialization = initialization
 		self.presentationWillBegin = presentationWillBegin
 		self.presentationDidEnd = presentationDidEnd
@@ -45,12 +45,12 @@ struct CustomPresentationConfiguration {
 	}
 }
 
-class PresentationController: UIPresentationController, UIAdaptivePresentationControllerDelegate {
+public class PresentationController: UIPresentationController, UIAdaptivePresentationControllerDelegate {
 	var configuration: CustomPresentationConfiguration?
 	var presentationDictionary: [String: Any] = [:]
-	override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
-		super.init(presentedViewController: presentedViewController, presenting: presentedViewController)
-	}
+//	override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+//		super.init(presentedViewController: presentedViewController, presenting: presentedViewController)
+//	}
 	
 	convenience init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?, configuration presentationConfiguration: CustomPresentationConfiguration) {
 		self.init(presentedViewController: presentedViewController, presenting: presentingViewController)
@@ -60,31 +60,31 @@ class PresentationController: UIPresentationController, UIAdaptivePresentationCo
 		}
 	}
 	
-	override func presentationTransitionWillBegin() {
+	override public func presentationTransitionWillBegin() {
 		if let transitionWillBegin = configuration?.presentationWillBegin {
 			transitionWillBegin(self)
 		}
 	}
 	
-	override func presentationTransitionDidEnd(_ completed: Bool) {
+	override public func presentationTransitionDidEnd(_ completed: Bool) {
 		if let transitionDidEnd = configuration?.presentationDidEnd {
 			transitionDidEnd(self, completed)
 		}
 	}
 	
-	override func dismissalTransitionWillBegin() {
+	override public func dismissalTransitionWillBegin() {
 		if let dismissalWillBegin = configuration?.dismissalWillBegin {
 			dismissalWillBegin(self)
 		}
 	}
 	
-	override func dismissalTransitionDidEnd(_ completed: Bool) {
+	override public func dismissalTransitionDidEnd(_ completed: Bool) {
 		if let dismissalDidEnd = configuration?.dismissalDidEnd {
 			dismissalDidEnd(self, completed)
 		}
 	}
 	
-	override var frameOfPresentedViewInContainerView: CGRect {
+	override public var frameOfPresentedViewInContainerView: CGRect {
 		if let frame = configuration?.frameOfPresentedViewInContainerView {
 			return frame(self)
 		} else {
@@ -92,20 +92,20 @@ class PresentationController: UIPresentationController, UIAdaptivePresentationCo
 		}
 	}
 	
-	override var shouldPresentInFullscreen: Bool {
+	override public var shouldPresentInFullscreen: Bool {
 		if let should = configuration?.showPresentInFullScreen {
 			return should
 		} else {
 			return super.shouldPresentInFullscreen
 		}
 	}
-	override func containerViewWillLayoutSubviews() {
+	override public func containerViewWillLayoutSubviews() {
 		if let willLayout = configuration?.containerViewWillLayoutSubviews{
 			willLayout(self)
 		}
 	}
 	
-	override func containerViewDidLayoutSubviews() {
+	override public func containerViewDidLayoutSubviews() {
 		if let didLayout = configuration?.containerViewDidLayoutSubviews {
 			didLayout(self)
 		}

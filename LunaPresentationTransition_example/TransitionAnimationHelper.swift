@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 class TransitionAnimationHelper: TransitionAnimationHelperDelegate {
+	
 	static func presentAnimator() -> AnimateTransition? {
 		let isPresentation = true
 		return { (animator: Animator, context: UIViewControllerContextTransitioning) in
